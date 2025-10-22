@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CosmosJsonPatch": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
