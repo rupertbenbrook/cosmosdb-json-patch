@@ -14,9 +14,10 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
 
-    # permissions:
-    #   id-token: write
-    #   attestations: write
+    permissions:
+      packages: write
+      id-token: write
+      attestations: write
 
     steps:
       - name: Checkout
@@ -79,10 +80,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      # - name: Generate artifact attestation
-      #   uses: actions/attest-build-provenance@v3
-      #   with:
-      #     subject-name: ghcr.io/rupertbenbrook/cosmos-json-patch
-      #     subject-digest: ${{ steps.push.outputs.digest }}
-      #     push-to-registry: ${{ github.event_name != 'pull_request' }}
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-name: ghcr.io/rupertbenbrook/cosmos-json-patch
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: ${{ github.event_name != 'pull_request' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
