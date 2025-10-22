@@ -10,7 +10,7 @@ COPY ["CosmosJsonPatch.slnx", "."]
 COPY ["CosmosJsonPatch/CosmosJsonPatch.csproj", "CosmosJsonPatch/"]
 RUN dotnet restore
 COPY . .
-RUN dotnet build --no-restore -c $BUILD_CONFIGURATION -o /app/build /p:Version=${VERSION}
+RUN dotnet build --no-restore -c $BUILD_CONFIGURATION /p:Version=${VERSION}
 
 FROM build AS publish
 ARG TARGETARCH
